@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackTech | Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">TrackTech</div>
+    <div id="userGreeting" style="margin-left: auto; color: #fff; font-weight: bold;"></div>
+    <a href="profile.html" class="btn profile">My Profile</a>
+    <a href="index.html" class="xbtn logout" id="logoutBtn">Logout</a>
+  </header>
+
+  <section class="dashboard">
+    <h2 id="welcomeMsg">Hi, welcome to your dashboard!</h2>
+
+    <!-- ========================== -->
+    <!-- BSIT CARD (UPDATED) -->
+    <!-- ========================== -->
+    <div class="card">
+      <h3 class="card-title">BS Information Technology (BSIT)</h3>
+      <p><strong>Description:</strong> Focus on programming, databases, and ICT systems.</p>
+
+      <div class="schools-row">
+        <div class="schools-label">
+          <span class="school-icon">🎓</span>
+          <strong>Schools</strong>
+        </div>
+
+        <div class="schools-list">
+          <a href="https://su.edu.ph/" class="school-pill">Silliman University (SU)</a>
+          <a href="https://www.apc.edu.ph/" class="school-pill">APC</a>
+          <a href="https://plm.edu.ph/" class="school-pill">PLM</a>
+          <a href="https://www.pup.edu.ph/" class="school-pill">PUP</a>
+          <a href="https://www.pnu.edu.ph/" class="school-pill">PNU</a>
+          <a href="https://www.rtu.edu.ph/" class="school-pill">RTU</a>
+          <a href="https://www.dlsu.edu.ph/" class="school-pill">DLSU</a>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="save-btn" type="button" id="save-Btn">Save to My Choices</button>
+      </div>
+    </div>
+
+    <!-- ========================== -->
+    <!-- BSCS CARD (UPDATED) -->
+    <!-- ========================== -->
+    <div class="card">
+      <h4>BS Computer Science (BSCS)</h4>
+      <p><b>Description:</b> Study algorithms, AI, and advanced computing.</p>
+
+      <div class="schools-row">
+        <div class="schools-label">
+          <span class="school-icon">🎓</span>
+          <strong>Schools</strong>
+        </div>
+
+        <div class="schools-list">
+          <a href="https://www.apc.edu.ph/" class="school-pill">APC</a>
+          <a href="https://plm.edu.ph/" class="school-pill">PLM</a>
+          <a href="https://www.pup.edu.ph/" class="school-pill">PUP</a>
+          <a href="https://www.ateneo.edu/" class="school-pill">ADMU</a>
+          <a href="https://www.dlsu.edu.ph/" class="school-pill">DLSU</a>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="save-btn" type="button" id="save-Btn">Save to My Choices</button>
+      </div>
+    </div>
+
+    <!-- ========================== -->
+    <!-- BSIS CARD (NEW + UPDATED) -->
+    <!-- ========================== -->
+    <div class="card">
+      <h4>BS Information Systems (BSIS)</h4>
+      <p><b>Description:</b> IT + business focusing on systems analysis and management.</p>
+
+      <div class="schools-row">
+        <div class="schools-label">
+          <span class="school-icon">🎓</span>
+          <strong>Schools</strong>
+        </div>
+
+        <div class="schools-list">
+          <a href="https://su.edu.ph/" class="school-pill">Silliman University (SU)</a>
+          <a href="https://www.dlsu.edu.ph/" class="school-pill">DLSU</a>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="save-btn" type="button">Save to My Choices</button>
+      </div>
+    </div>
+
+    <!-- ========================== -->
+    <!-- WORK PATHWAY -->
+    <!-- ========================== -->
+    <div class="dashboard-section">
+      <h3>💼 Work Pathway (ICT Jobs)</h3>
+
+      <div class="card">
+        <h4>Web Developer</h4>
+        <p><b>Description:</b> Build and maintain websites.</p>
+        <p><b>Skills Required:</b> HTML, CSS, JavaScript, frameworks.</p>
+        <p><b>Average Salary (PH):</b> ₱25,000–₱60,000/month</p>
+        <p><b>Job Demand:</b> High, growing in digital economy.</p>
+        <a href="https://www.jobstreet.com.ph/" target="_blank" class="btn primary">Apply Now</a>
+        <div class="card-actions">
+          <button class="save-btn" data-item="Web Developer">Save to My Choices</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>IT Support Specialist</h4>
+        <p><b>Description:</b> Assist users with technical issues.</p>
+        <p><b>Skills Required:</b> Troubleshooting, communication, networking basics.</p>
+        <p><b>Average Salary (PH):</b> ₱18,000–₱40,000/month</p>
+        <p><b>Job Demand:</b> Very high (BPO, tech firms).</p>
+        <a href="https://ph.indeed.com/" target="_blank" class="btn primary">Apply Now</a>
+        <div class="card-actions">
+          <button class="save-btn" type="button">Save to My Choices</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================== -->
+    <!-- NON-ICT PATHWAY -->
+    <!-- ========================== -->
+    <div class="dashboard-section">
+      <h3>🌐 Other Opportunities (Non-ICT)</h3>
+
+      <div class="card">
+        <h4>BS Business Administration</h4>
+        <p><b>Description:</b> Learn management, finance, and entrepreneurship.</p>
+       <a href="https://ched.gov.ph/" target="_blank" class="btn primary">More Info</a>
+      <div class="card-actions">
+        <button class="save-btn" data-item="BSBA">Save to My Choices</button>
+      </div>
+      </div>
+
+      <div class="card">
+        <h4>Hospitality & Tourism Jobs</h4>
+        <p><b>Description:</b> Customer service roles in hotels, travel, restaurants.</p>
+        <p><a href="https://tesda.gov.ph/" target="_blank" class="btn primary">TESDA Programs</a></p>
+        <button class="save-btn" data-item="Hospitality & Tourism">Save to My Choices</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Show username if logged in
+    const userGreeting = document.getElementById('userGreeting');
+    const loggedIn = localStorage.getItem('loggedIn');
+    const currentUser = localStorage.getItem('currentUser');
+
+    if(loggedIn && currentUser){
+      userGreeting.textContent = `Hello, ${currentUser}!`;
+    } else {
+      window.location.href = "login.html";
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('currentUser');
+      window.location.href = "index.html";
+    });
+
+    // --- Save card functionality ---
+    (function(){
+      // Require a logged-in user
+      const loggedIn = localStorage.getItem('loggedIn');
+      const currentUser = localStorage.getItem('currentUser');
+      if(!loggedIn || !currentUser) return; // nothing to do
+
+      const savedKey = `savedChoices_${currentUser}`;
+
+      function loadSaved(){
+        try{ return JSON.parse(localStorage.getItem(savedKey) || '[]'); }
+        catch(e){ return []; }
+      }
+
+      function storeSaved(arr){
+        localStorage.setItem(savedKey, JSON.stringify(arr));
+      }
+
+      function isSaved(id){
+        return loadSaved().some(i => i.id === id);
+      }
+
+      function saveItem(item){
+        const arr = loadSaved();
+        if(!arr.some(i => i.id === item.id)){
+          arr.push(item);
+          storeSaved(arr);
+        }
+      }
+
+      // Attach handlers to all save buttons inside cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, idx) => {
+        const btn = card.querySelector('.save-btn');
+        if(!btn) return;
+
+        // Determine a stable id for the card
+        const titleEl = card.querySelector('h3, h4');
+        const descEl = card.querySelector('p');
+        const dataItem = btn.dataset.item;
+        const id = dataItem || (titleEl ? titleEl.textContent.trim() : `card_${idx}`);
+
+        const item = {
+          id: id,
+          title: titleEl ? titleEl.textContent.trim() : id,
+          description: descEl ? descEl.textContent.trim() : '',
+          // optionally capture a link if present
+          url: (card.querySelector('a') && card.querySelector('a').href) || null
+        };
+
+        // Initialize button state
+        if(isSaved(item.id)){
+          btn.textContent = 'Saved';
+          btn.disabled = true;
+        }
+
+        btn.addEventListener('click', () => {
+          saveItem(item);
+          btn.textContent = 'Saved';
+          btn.disabled = true;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackTech | Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">TrackTech</div>
+  </header>
+
+  <section class="form-section">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="text" id="loginUser" placeholder="Email or Username" required>
+      <input type="password" id="loginPass" placeholder="Password" required>
+      <button type="submit" class="btn primary">Login</button>
+    </form>
+    <a href="#">Forgot Password?</a>
+    <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
+  </section>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const loginUser = document.getElementById('loginUser').value;
+      const loginPass = document.getElementById('loginPass').value;
+
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+
+      if(storedUser && (loginUser === storedUser.username || loginUser === storedUser.email) && loginPass === storedUser.password){
+        // Successful login
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('currentUser', storedUser.username);
+
+        alert("Login successful!");
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Redirect to dashboard
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Invalid credentials!");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TrackTech</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(to right, #0077b6, #00bfff, #90e0ef);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 18px;
+            background: #00bfff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background: #0077b6;
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            background: #fff;
+            color: #000;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        /* MEET THE TEAM */
+        .team-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 2.4em;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .team-container {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .member-card {
+            background: #ffffffcc;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: .3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .member-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 12px;
+            border: 3px solid #0077b6;
+        }
+
+        .member-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #003049;
+        }
+
+        .member-card p {
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            .back-btn {
+                padding: 8px 14px;
+                top: 15px;
+                left: 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">← Back</a>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>
+                At TrackTech, we believe that the path to a successful future starts with clarity and direction. 
+                Our platform is designed to help students and aspiring professionals explore and understand career opportunities 
+                in the field of Information and Communications Technology (ICT).
+            </p>
+            <p>
+                By tracking ICT-related jobs, skills, and industry trends, TrackTech provides a smart and easy-to-use guide. 
+                Our goal is to empower users with updated insights, personalized guidance, and a clearer vision of the steps 
+                they need to take toward their dream career.
+            </p>
+            <p>
+                With TrackTech, navigating the world of ICT becomes more accessible, organized, and inspiring.
+            </p>
+        </div>
+    </section>
+
+    <!-- Meet the Team Section -->
+    <section class="team-section">
+        <h2>Meet the Team</h2>
+
+        <div class="team-container">
+
+            <div class="member-card">
+                <img src="jedd.png" alt="Member 1">
+                <h3>Jedd Carl Abada</h3>
+                <p>Leader</p>
+            </div>
+
+            <div class="member-card">
+                <img src="marky.jpeg" alt="Member 2">
+                <h3>Marky Borja</h3>
+                <p>Secretary/Developer</p>
+            </div>
+
+            <div class="member-card">
+                <img src="jay.jpg" alt="Member 3">
+                <h3>Ches Jaye Barbero</h3>
+            </div>
+
+            <div class="member-card">
+                <img src="harold.jpeg" alt="Member 4">
+                <h3>Harold Lance Balmores</h3>
+                <p></p>
+            </div>
+
+            <div class="member-card">
+                <img src="vinz.jpeg" alt="Member 5">
+                <h3>Vinz Russel Boonggaling</h3>
+                <p>Co-developer TOP GLOBAL RACIST</p>
+            </div>
+
+            <div class="member-card">
+                <img src="klark.jpeg" alt="Member 6">
+                <h3>Klark Kent Cagadas</h3>
+                <p></p>
+            </div>
+
+            <div class="member-card">
+                <img src="aguilon.png" alt="Member 7">
+                <h3>Charles Matthew Aguilon</h3>
+                <p></p>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

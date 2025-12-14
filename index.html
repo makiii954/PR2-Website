@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackTech | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <header>
+        <div class="logo">TrackTech</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="dashboard.html">Career Paths</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="features.html">Features</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn login">Login</a>
+            <a href="signup.html" class="btn signup">Sign Up</a>
+        </div>
+        <button class="menu-toggle">☰</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Career Journey Starts Here</h1>
+            <p>Helping ICT strand students choose the right path — college or career.</p>
+            <div class="cta-buttons">
+                <a href="dashboard.html" class="btn primary">Get Started</a>
+                <a href="signup.html" class="btn secondary">Sign Up Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="features">
+        <h2>Explore Our Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Career Guidance System</h3>
+                <p>Discover your strengths and find the right career fit for you.</p>
+            </div>
+            <div class="feature-card">
+                <h3>ICT College Course Info</h3>
+                <p>Learn about ICT strand-aligned college courses and requirements.</p>
+            </div>
+            <div class="feature-card">
+                <h3>ICT Job Opportunities</h3>
+                <p>Explore real job paths and opportunities in the ICT industry.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Personalized Dashboard</h3>
+                <p>Track your journey with a customized career and college dashboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>📍 Contact: info@tracktech.com | 📞 +63 912 345 6789</p>
+            <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+            </p>
+            <p class="socials">
+                🌐 Follow us: 
+                <a href="#">Facebook</a> | 
+                <a href="#">Twitter</a> | 
+                <a href="#">Instagram</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

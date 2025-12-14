@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Pathway Selector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2c3e50 100%);
+            color: #ecf0f1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px;
+            background: rgba(44, 62, 80, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideIn 1s ease-out;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        h1, h2 {
+            color: #ecf0f1;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            transition: color 0.3s ease;
+        }
+        h1:hover, h2:hover {
+            color: #3498db;
+        }
+        p {
+            line-height: 1.6;
+            text-align: center;
+            transition: opacity 0.3s ease;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 15px 10px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 4px 25px rgba(52, 152, 219, 0.5); }
+            100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+        }
+        .hidden {
+            display: none;
+        }
+        .selection-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .selection-card {
+            background: rgba(52, 152, 219, 0.2);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px;
+            width: 180px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .selection-card:hover {
+            background: rgba(52, 152, 219, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+        }
+        .selection-card.selected {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.6);
+        }
+        .job-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .job-card {
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .job-card:hover {
+            background: rgba(52, 152, 219, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+        }
+        #confirmation {
+            text-align: center;
+            font-weight: bold;
+            color: #3498db;
+            animation: bounce 1s ease;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>College Pathway Selector</h1>
+        <p>Question: Do you want to continue to college?</p>
+        <center>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+        </center>
+        <form id="selectionForm" method="POST" action="/submit" class="hidden">
+            <input type="hidden" name="choice" value="yes">
+            <input type="hidden" name="strand" id="strandInput">
+            <input type="hidden" name="school" id="schoolInput">
+            
+            <div id="yesSection">
+                <h2>Information on the ICT Strand</h2>
+                <p>The ICT (Information and Communications Technology) strand prepares you for careers in technology, programming, and digital innovation. It focuses on skills like coding, networking, and software development, leading to roles such as software engineer, IT specialist, or cybersecurity expert.</p>
+                
+                <h2>Which ICT Sub-Strand Interests You?</h2>
+                <p>Click on a sub-strand to select it:</p>
+                <div class="selection-list" id="ictSelection">
+                    <div class="selection-card" data-strand="Computer Science">Computer Science<br><small>Focuses on algorithms, programming, and theory.</small></div>
+                    <div class="selection-card" data-strand="Information Technology">Information Technology<br><small>Emphasizes hardware, software, and networks.</small></div>
+                    <div class="selection-card" data-strand="Cybersecurity">Cybersecurity<br><small>Protects systems from digital threats.</small></div>
+                    <div class="selection-card" data-strand="Data Science">Data Science<br><small>Analyzes and interprets complex data.</small></div>
+                    <div class="selection-card" data-strand="Software Engineering">Software Engineering<br><small>Designs and builds software applications.</small></div>
+                </div>
+                
+                <h2>Where Do You Plan to Study?</h2>
+                <p>Click on a school to select it:</p>
+                <div class="selection-list" id="schoolSelection">
+                    <div class="selection-card" data-school="UP">University of the Philippines Diliman<br><small>Offers strong ICT programs with research opportunities.</small></div>
+                    <div class="selection-card" data-school="Ateneo">Ateneo de Manila University<br><small>Known for innovative tech courses and industry partnerships.</small></div>
+                    <div class="selection-card" data-school="La Salle">De La Salle University<br><small>Provides cutting-edge ICT training with modern facilities.</small></div>
+                    <div class="selection-card" data-school="Mapua">Mapúa University<br><small>Specializes in engineering and ICT with hands-on labs.</small></div>
+                </div>
+                
+                <button type="submit" id="submitBtn">Submit Selection</button>
+                <p id="confirmation" class="hidden">Thank you! Your selection has been submitted. Continue your journey!</p>
+            </div>
+        </form>
+
+        <div id="noSection" class="hidden">
+            <h2>Possible Jobs Without a College Degree</h2>
+            <p>Not everyone needs a college degree for a successful career. Here are some options you can explore, with brief information:</p>
+            <div class="job-list">
+                <div class="job-card" onclick="showJobInfo('Call Center Agent: Earn ₱15,000-₱25,000 monthly. Requires basic English skills and training. Companies like Teleperformance hire entry-level staff.')">
+                    Call Center Agent<br><small>Earn ₱15,000-₱25,000 monthly</small>
+                </div>
+                <div class="job-card" onclick="showJobInfo('Construction Worker: Earn ₱10,000-₱20,000 monthly. Needs physical strength and basic training. Jobs available on sites nationwide.')">
+                    Construction Worker<br><small>Earn ₱10,000-₱20,000 monthly</small>
+                </div>
+                <div class="job-card" onclick="showJobInfo('Freelance Online Worker: Earn ₱5,000-₱15,000 monthly. Requires computer skills. Work from home on platforms like Upwork.')">
+                    Freelance Online Worker<br><small>Earn ₱5,000-₱15,000 monthly</small>
+                </div>
+                <div class="job-card" onclick="showJobInfo('Retail Sales Associate: Earn ₱8,000-₱15,000 monthly. Needs customer service skills. Positions in malls or stores like SM or Robinsons.')">
+                    Retail Sales Associate<br><small>Earn ₱8,000-₱15,000 monthly</small>
+                </div>
+                <div class="job-card" onclick="showJobInfo('Driver: Earn ₱10,000-₱20,000 monthly. Requires a license. Easy to start with app-based services.')">
+                    Driver (e.g., Grab)<br><small>Earn ₱10,000-₱20,000 monthly</small>
+                </div>
+            </div>
+            <p><strong>Tip:</strong> Enroll in TESDA for free vocational training to boost your skills and job opportunities.</p>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const yesSection = document.getElementById('yesSection');
+        const noSection = document.getElementById('noSection');
+        const selectionForm = document.getElementById('selectionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const confirmation = document.getElementById('confirmation');
+        const ictCards = document.querySelectorAll('#ictSelection .selection-card');
+        const schoolCards = document.querySelectorAll('#schoolSelection .selection-card');
+        const strandInput = document.getElementById('strandInput');
+        const schoolInput = document.getElementById('schoolInput');
+
+        yesBtn.addEventListener('click', () => {
+            selectionForm.classList.remove('hidden');
+            noSection.classList.add('hidden');
+            selectionForm.style.animation = 'slideIn 0.5s ease-out';
+        });
+
+        noBtn.addEventListener('click', () => {
+            noSection.classList.remove('hidden');
+            selectionForm.classList.add('hidden');
+            noSection.style.animation = 'slideIn 0.5s ease-out';
+        });
+
+        ictCards.forEach(card => {
+            card.addEventListener('click', () => {
+                ictCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                strandInput.value = card.getAttribute('data-strand');
+            });
+        });
+
+        schoolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                schoolCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                schoolInput.value = card.getAttribute('data-school');
+            });
+        });
+
+        submitBtn.addEventListener('click', (e) => {
+            if (!strandInput.value || !schoolInput.value) {
+                e.preventDefault();
+                alert('Please select an ICT sub-strand and a school before submitting.');
+            } else {
+                // For demo, show confirmation; in real backend, form submits
+                e.preventDefault();
+                confirmation.classList.remove('hidden');
+                confirmation.style.animation = 'bounce 1s ease';
+            }
+        });
+
+        function showJobInfo(info) {
+            alert(info);
+        }
+    </script>
+    
+</body>
+</html>

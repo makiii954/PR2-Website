@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel — TrackTech</title>
+  <style>
+    :root{
+      --bg:#0f1724; 
+      --card:#0b1220; 
+      --muted:#98a0b3; 
+      --accent:#6ee7b7; 
+      --accent-2:#60a5fa; 
+      --danger:#fb7185;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box;}
+    html, body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071126);color:#dbeafe;}
+    .app{display:flex;min-height:100vh;}
+
+    /* SIDEBAR */
+    .sidebar{width:280px;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);}
+    .brand{font-weight:700;font-size:18px;letter-spacing:0.4px;margin-bottom:22px;}
+    .nav{display:flex;flex-direction:column;gap:10px;}
+    .nav a{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none;}
+    .nav a:hover{background:var(--glass);color:var(--accent);}
+
+    /* MAIN */
+    .main{flex:1;padding:26px;}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+    .search{display:flex;gap:10px;align-items:center;}
+    .search input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:inherit;}
+
+    .grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;}
+
+    /* CARD */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:16px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    h2{margin:0 0 10px 0;font-size:16px;}
+    p.muted{color:var(--muted);margin:0 0 12px 0;}
+
+    /* USERS TABLE */
+    table{width:100%;border-collapse:collapse;}
+    th, td{padding:10px 8px;text-align:left;font-size:13px;}
+    thead th{color:var(--muted);font-weight:600;font-size:12px;}
+    tr{border-top:1px dashed rgba(255,255,255,0.03);}
+    .avatar{width:34px;height:34px;border-radius:8px;background:linear-gradient(90deg,var(--accent-2),var(--accent));display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#052036;}
+    .btn{display:inline-block;padding:6px 9px;border-radius:8px;font-size:13px;text-decoration:none;}
+    .btn.edit{background:rgba(96,165,250,0.12);color:var(--accent-2);}
+    .btn.delete{background:rgba(251,113,133,0.08);color:var(--danger);}
+
+    /* FORMS */
+    form{display:grid;gap:10px;}
+    label{font-size:13px;color:var(--muted);}
+    input[type=text], input[type=url], textarea, select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:inherit;}
+    .row{display:flex;gap:10px;}
+    .row .col{flex:1;}
+    .actions{display:flex;gap:10px;justify-content:flex-end;}
+    .primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:9px 12px;border-radius:10px;color:#042331;text-decoration:none;font-weight:700;}
+
+    /* Analytics small bars */
+    .stat{display:flex;align-items:center;gap:12px;}
+    .bar{height:12px;border-radius:999px;background:rgba(255,255,255,0.05);flex:1;position:relative;overflow:hidden;}
+    .bar > i{position:absolute;left:0;top:0;bottom:0;width:40%;background:linear-gradient(90deg,var(--accent),var(--accent-2));}
+    .percent{min-width:48px;text-align:right;color:var(--muted);font-size:13px;}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .app{flex-direction:column;}
+      .sidebar{width:100%;display:flex;flex-wrap:wrap;}
+      .grid{grid-template-columns:1fr;}
+    }
+
+    /* Tiny CSS-only modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;pointer-events:none;}
+    .modal:target{visibility:visible;opacity:1;pointer-events:auto;}
+    .modal .box{width:700px;max-width:100%;background:linear-gradient(180deg,#041427,rgba(255,255,255,0.02));padding:18px;border-radius:12px;}
+    .modal header{display:flex;justify-content:space-between;align-items:center;}
+    .modal .close{color:var(--muted);text-decoration:none;}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <div class="brand">Admin — TrackTech</div>
+      <nav class="nav">
+        <a href="#users">👥 Manage Users</a>
+        <a href="#courses">📚 Courses</a>
+        <a href="#jobs">💼 Job Opportunities</a>
+        <a href="#analytics">📈 Analytics</a>
+      </nav>
+      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:16px 0">
+      <div style="font-size:13px;color:var(--muted)">Logged in as <strong id="adminEmail">admin@tracktech.com</strong></div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header>
+        <div>
+          <h1 style="margin:0;font-size:20px">Admin Panel</h1>
+          <p class="muted">Manage users, courses, jobs & view analytics</p>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Users Table -->
+        <div class="card" id="users">
+          <h2>👥 Users</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="avatar">A</div></td>
+                <td>alice</td>
+                <td>alice@example.com</td>
+                <td>
+                  <a href="#" class="btn edit">Edit</a>
+                  <a href="#" class="btn delete">Delete</a>
+                </td>
+              </tr>
+              <tr>
+                <td><div class="avatar">B</div></td>
+                <td>bob</td>
+                <td>bob@example.com</td>
+                <td>
+                  <a href="#" class="btn edit">Edit</a>
+                  <a href="#" class="btn delete">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Courses -->
+        <div class="card" id="courses">
+          <h2>📚 Courses</h2>
+          <ul>
+            <li>BS Information Technology (BSIT)</li>
+            <li>BS Computer Science (BSCS)</li>
+            <li>BS Business Administration (BSBA)</li>
+            <li>Hospitality & Tourism</li>
+          </ul>
+        </div>
+
+        <!-- Jobs -->
+        <div class="card" id="jobs">
+          <h2>💼 Job Opportunities</h2>
+          <ul>
+            <li>Web Developer</li>
+            <li>IT Support Specialist</li>
+            <li>Data Scientist</li>
+            <li>AI Engineer</li>
+          </ul>
+        </div>
+
+        <!-- Analytics -->
+        <div class="card" id="analytics">
+          <h2>📈 Analytics</h2>
+          <div class="stat">
+            <span>Users</span>
+            <div class="bar"><i style="width:70%"></i></div>
+            <span class="percent">70%</span>
+          </div>
+          <div class="stat">
+            <span>Courses</span>
+            <div class="bar"><i style="width:50%"></i></div>
+            <span class="percent">50%</span>
+          </div>
+          <div class="stat">
+            <span>Jobs</span>
+            <div class="bar"><i style="width:40%"></i></div>
+            <span class="percent">40%</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
