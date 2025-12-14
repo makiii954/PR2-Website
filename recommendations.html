@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TrackTech - Recommendations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  
+  <header class="navbar">
+    <div class="logo">TrackTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="recommendations.html" class="active">Recommendations</a>
+      <a href="profile.html">Profile</a>
+      <a href="login.html" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>📊 Career Tracking & Recommendations</h1>
+    <p>Based on your saved choices, here are personalized suggestions for you.</p>
+
+    <!-- Saved Choices -->
+    
+    <section>
+      <h2>📌 Your Saved Choices</h2>
+      <ul id="savedChoicesList"></ul>
+    </section>
+
+    <!-- Recommendations -->
+    <section>
+      <h2>✨ Recommended for You</h2>
+      <div id="recommendationsContainer"></div>
+    </section>
+
+    <!-- Export Button -->
+    
+    <button id="exportBtn" class="cta-btn">Download My Career Path</button>
+  </main>
+
+  <footer>
+    <p>© 2025 TrackTech | Privacy Policy | Terms of Service</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackTech | My Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Profile page specific styling */
+    .profile-section {
+      max-width: 500px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .profile-section h2 {
+      font-size: 2em;
+      margin-bottom: 25px;
+      color: #0077b6;
+
+    }
+
+    .profile-section p {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .btn.logout {
+      margin-top: 20px;
+      background: red;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn.logout:hover {
+      background: darkred;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .profile-section {
+        margin: 50px 15px;
+        padding: 25px;
+      }
+
+      .profile-section h2 {
+        font-size: 1.6em;
+      }
+
+      .profile-section p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">TrackTech</div>
+    <a href="dashboard.html" class="btn">Dashboard</a>
+    <a href="index.html" class="btn logout" id="logoutBtn">Logout</a>
+  </header>
+
+  <section class="profile-section">
+    <h2>My Profile</h2>
+    <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+    <hr style="margin:20px 0;">
+    <div id="savedList">
+      <!-- Saved choices will be rendered here -->
+    </div>
+    <button class="btn logout" id="logoutBtnMobile">Logout</button>
+  </section>
+
+  <script>
+    // Check if user is logged in
+    const loggedIn = localStorage.getItem('loggedIn');
+    const currentUser = localStorage.getItem('currentUser');
+
+    if (!loggedIn || !currentUser) {
+      // Redirect to login if not logged in
+      window.location.href = "login.html";
+    } else {
+      // Display user info
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      document.getElementById('profileUsername').textContent = storedUser.username;
+      document.getElementById('profileEmail').textContent = storedUser.email;
+    }
+
+    // Render saved choices for this user
+    (function () {
+      const loggedIn = localStorage.getItem('loggedIn');
+      const currentUser = localStorage.getItem('currentUser');
+      if (!loggedIn || !currentUser) return;
+
+      const savedKey = `savedChoices_${currentUser}`;
+
+      function loadSaved() {
+        try { return JSON.parse(localStorage.getItem(savedKey) || '[]'); }
+        catch (e) { return []; }
+      }
+
+      function storeSaved(arr) {
+        localStorage.setItem(savedKey, JSON.stringify(arr));
+      }
+
+      function removeSaved(id) {
+        const arr = loadSaved().filter(i => i.id !== id);
+        storeSaved(arr);
+        render();
+      }
+
+      function render() {
+        const container = document.getElementById('savedList');
+        const arr = loadSaved();
+        container.innerHTML = '';
+        const heading = document.createElement('h3');
+        heading.textContent = 'My Saved Choices';
+        container.appendChild(heading);
+
+        if (arr.length === 0) {
+          const p = document.createElement('p');
+          p.textContent = 'You have no saved choices yet.';
+          container.appendChild(p);
+          return;
+        }
+
+        arr.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          const t = document.createElement('h4');
+          t.textContent = item.title || item.id;
+          const d = document.createElement('p');
+          d.textContent = item.description || '';
+          card.appendChild(t);
+          card.appendChild(d);
+
+          if (item.url) {
+            const a = document.createElement('a');
+            a.href = item.url;
+            a.target = '_blank';
+            a.className = 'btn primary';
+            a.textContent = 'More Info';
+            card.appendChild(a);
+          }
+
+          const actions = document.createElement('div');
+          actions.className = 'card-actions';
+          const removeBtn = document.createElement('button');
+          removeBtn.className = 'save-btn';
+          removeBtn.textContent = 'Remove';
+          removeBtn.addEventListener('click', () => removeSaved(item.id));
+          actions.appendChild(removeBtn);
+          card.appendChild(actions);
+
+          container.appendChild(card);
+        });
+      }
+
+      render();
+    })();
+
+    // Logout function (for both buttons)
+    const logoutButtons = [document.getElementById('logoutBtn'), document.getElementById('logoutBtnMobile')];
+    logoutButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('currentUser');
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TrackTech Resume Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">TrackTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resume.html" class="active">Resume Builder</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>📄 Resume Builder</h1>
+    <form id="resumeForm">
+      <input type="text" id="fullName" placeholder="Full Name" required><br>
+      <input type="text" id="email" placeholder="Email" required><br>
+      <textarea id="skills" placeholder="Skills (comma separated)" required></textarea><br>
+      <textarea id="experience" placeholder="Experience"></textarea><br>
+      <button type="submit">Generate Resume</button>
+    </form>
+
+    <div id="resumeOutput"></div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

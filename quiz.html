@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TrackTech Career Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">TrackTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="quiz.html" class="active">Career Quiz</a>
+      <a href="recommendations.html">Recommendations</a>
+      <a href="forum.html">Community</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>📝 Career Quiz</h1>
+    <p>Answer a few questions to get suggested courses and jobs!</p>
+
+    <form id="quizForm">
+      <label>1. Do you enjoy coding?</label><br>
+      <input type="radio" name="q1" value="coder"> Yes  
+      <input type="radio" name="q1" value="noncoder"> No  
+
+      <br><br>
+      <label>2. Do you like solving problems with technology?</label><br>
+      <input type="radio" name="q2" value="problem"> Yes  
+      <input type="radio" name="q2" value="support"> No  
+
+      <br><br>
+      <button type="submit">See Results</button>
+    </form>
+
+    <div id="quizResult"></div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
