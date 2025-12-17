@@ -68,19 +68,18 @@
 <body>
   <header>
     <div class="logo">TrackTech</div>
-    <a href="dashboard.html" class="btn">Dashboard</a>
-    <a href="index.html" class="btn logout" id="logoutBtn">Logout</a>
+    <a href="dashboard.html" class="btn profile">Dashboard</a>
   </header>
 
   <section class="profile-section">
     <h2>My Profile</h2>
-    <p><strong>Username:</strong> <span id="profileUsername"></span></p>
-    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+    <div id="savedListHeader" style="margin-bottom:12px;">
+      <!-- Username/email removed per request; saved items shown below -->
+    </div>
     <hr style="margin:20px 0;">
     <div id="savedList">
       <!-- Saved choices will be rendered here -->
     </div>
-    <button class="btn logout" id="logoutBtnMobile">Logout</button>
   </section>
 
   <script>
@@ -88,23 +87,22 @@
     const loggedIn = localStorage.getItem('loggedIn');
     const currentUser = localStorage.getItem('currentUser');
 
-    if (!loggedIn || !currentUser) {
-      // Redirect to login if not logged in
-      window.location.href = "login.html";
+    if (loggedIn && currentUser) {
+      // If desired, we can still show a small label, but per request we hide username/email.
+      const h = document.querySelector('.profile-section h2');
+      if (h) h.textContent = 'My Saved Choices';
     } else {
-      // Display user info
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      document.getElementById('profileUsername').textContent = storedUser.username;
-      document.getElementById('profileEmail').textContent = storedUser.email;
+      // Guest view
+      const h = document.querySelector('.profile-section h2');
+      if (h) h.textContent = 'Currently Saved';
     }
 
-    // Render saved choices for this user
+    // Render saved choices for this user or guest
     (function () {
       const loggedIn = localStorage.getItem('loggedIn');
       const currentUser = localStorage.getItem('currentUser');
-      if (!loggedIn || !currentUser) return;
-
-      const savedKey = `savedChoices_${currentUser}`;
+      // Use per-user key when logged in, otherwise use a global key for guests
+      const savedKey = currentUser ? `savedChoices_${currentUser}` : 'savedChoices';
 
       function loadSaved() {
         try { return JSON.parse(localStorage.getItem(savedKey) || '[]'); }
@@ -172,14 +170,6 @@
     })();
 
     // Logout function (for both buttons)
-    const logoutButtons = [document.getElementById('logoutBtn'), document.getElementById('logoutBtnMobile')];
-    logoutButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        localStorage.removeItem('loggedIn');
-        localStorage.removeItem('currentUser');
-        window.location.href = "index.html";
-      });
-    });
   </script>
 </body>
 

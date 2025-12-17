@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrackTech | Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">TrackTech</div>
     <div id="userGreeting" style="margin-left: auto; color: #fff; font-weight: bold;"></div>
-    <a href="profile.html" class="btn profile">My Profile</a>
-    <a href="index.html" class="xbtn logout" id="logoutBtn">Logout</a>
-  </header>
+    <a href="profile.html" class="btn profile">Saved careers</a>
+    </header>
 
   <section class="dashboard">
     <h2 id="welcomeMsg">Hi, welcome to your dashboard!</h2>
@@ -34,7 +35,7 @@
           <a href="https://su.edu.ph/" class="school-pill">Silliman University (SU)</a>
           <a href="https://www.apc.edu.ph/" class="school-pill">APC</a>
           <a href="https://plm.edu.ph/" class="school-pill">PLM</a>
-          <a href="https://www.pup.edu.ph/" class="school-pill">PUP</a>
+          <a href="https://www.pup.edu.ph/ccis/bsit" class="school-pill">PUP</a>
           <a href="https://www.pnu.edu.ph/" class="school-pill">PNU</a>
           <a href="https://www.rtu.edu.ph/" class="school-pill">RTU</a>
           <a href="https://www.dlsu.edu.ph/" class="school-pill">DLSU</a>
@@ -62,7 +63,7 @@
         <div class="schools-list">
           <a href="https://www.apc.edu.ph/" class="school-pill">APC</a>
           <a href="https://plm.edu.ph/" class="school-pill">PLM</a>
-          <a href="https://www.pup.edu.ph/" class="school-pill">PUP</a>
+          <a href="https://www.pup.edu.ph/ccis/bsit" class="school-pill">PUP</a>
           <a href="https://www.ateneo.edu/" class="school-pill">ADMU</a>
           <a href="https://www.dlsu.edu.ph/" class="school-pill">DLSU</a>
         </div>
@@ -137,10 +138,10 @@
       <div class="card">
         <h4>BS Business Administration</h4>
         <p><b>Description:</b> Learn management, finance, and entrepreneurship.</p>
-       <a href="https://ched.gov.ph/" target="_blank" class="btn primary">More Info</a>
-      <div class="card-actions">
-        <button class="save-btn" data-item="BSBA">Save to My Choices</button>
-      </div>
+        <a href="https://ched.gov.ph/" target="_blank" class="btn primary">More Info</a>
+        <div class="card-actions">
+          <button class="save-btn" data-item="BSBA">Save to My Choices</button>
+        </div>
       </div>
 
       <div class="card">
@@ -158,46 +159,38 @@
     const loggedIn = localStorage.getItem('loggedIn');
     const currentUser = localStorage.getItem('currentUser');
 
-    if(loggedIn && currentUser){
+    if (loggedIn && currentUser) {
       userGreeting.textContent = `Hello, ${currentUser}!`;
     } else {
-      window.location.href = "login.html";
+      // No forced login anymore — allow guest access. Leave greeting blank.
+      userGreeting.textContent = '';
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('currentUser');
-      window.location.href = "index.html";
-    });
-
     // --- Save card functionality ---
-    (function(){
-      // Require a logged-in user
+    (function () {
       const loggedIn = localStorage.getItem('loggedIn');
       const currentUser = localStorage.getItem('currentUser');
-      if(!loggedIn || !currentUser) return; // nothing to do
+      // Use per-user key when logged in, otherwise use a global key for guests
+      const savedKey = currentUser ? `savedChoices_${currentUser}` : 'savedChoices';
 
-      const savedKey = `savedChoices_${currentUser}`;
-
-      function loadSaved(){
-        try{ return JSON.parse(localStorage.getItem(savedKey) || '[]'); }
-        catch(e){ return []; }
+      function loadSaved() {
+        try { return JSON.parse(localStorage.getItem(savedKey) || '[]'); }
+        catch (e) { return []; }
       }
 
-      function storeSaved(arr){
+      function storeSaved(arr) {
         localStorage.setItem(savedKey, JSON.stringify(arr));
       }
 
-      function isSaved(id){
+      function isSaved(id) {
         return loadSaved().some(i => i.id === id);
       }
 
-      function saveItem(item){
+      function saveItem(item) {
         const arr = loadSaved();
-        if(!arr.some(i => i.id === item.id)){
+        if (!arr.some(i => i.id === item.id)) {
           arr.push(item);
           storeSaved(arr);
         }
@@ -207,7 +200,7 @@
       const cards = document.querySelectorAll('.card');
       cards.forEach((card, idx) => {
         const btn = card.querySelector('.save-btn');
-        if(!btn) return;
+        if (!btn) return;
 
         // Determine a stable id for the card
         const titleEl = card.querySelector('h3, h4');
@@ -224,7 +217,7 @@
         };
 
         // Initialize button state
-        if(isSaved(item.id)){
+        if (isSaved(item.id)) {
           btn.textContent = 'Saved';
           btn.disabled = true;
         }
@@ -238,4 +231,5 @@
     })();
   </script>
 </body>
+
 </html>
